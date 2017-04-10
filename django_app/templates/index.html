@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <title>JOO KBO</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="col-md-1">구단 홈페이지</div>
+            <div class="col-md-1">
+                <a href="https://www.doosanbears.com">
+                    <img src="{% static 'images/emblem_OB.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.ncdinos.com">
+                    <img src="{% static 'images/emblem_NC.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="http://www.heroesbaseball.co.kr">
+                    <img src="{% static 'images/emblem_NX.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.lgtwins.com">
+                    <img src="{% static 'images/emblem_LG.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.tigers.co.kr">
+                    <img src="{% static 'images/emblem_KIA.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.skwyverns.com">
+                    <img src="{% static 'images/emblem_SK.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.hanwhaeagles.co.kr">
+                    <img src="{% static 'images/emblem_HH.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.giantsclub.com">
+                    <img src="{% static 'images/emblem_LT.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.samsunglions.com">
+                    <img src="{% static 'images/emblem_SS.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a href="https://www.ktwiz.co.kr">
+                    <img src="{% static 'images/emblem_KT.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </nav>
+    <div class="container team-list">
+        <div class="col-sm-4 col-xs-6">
+            <div class="team-item">
+                <img src="{% static 'images/emblem_OB.png' %}" alt="" class="item-img">
+                <a href="/news/OB">
+                    <div class="item-mask"></div>
+                </a>
+                <div class="item-caption">
+                    <p class="caption-title">두산 베어스</p>
+                    <div class="caption-divider"></div>
+                    <p class="caption-desc">전체기사보기</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-6">
+            <div class="team-item">
+                <img src="{% static 'images/emblem_NC.png' %}" alt="" class="item-img">
+                <a href="/news/NC">
+                    <div class="item-mask"></div>
+                </a>
+                <div class="item-caption">
+                    <p class="caption-title">엔씨 다이노스</p>
+                    <div class="caption-divider"></div>
+                    <p class="caption-desc">전체기사보기</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-6">
+            <div class="team-item">
+                <img src="{% static 'images/emblem_NX.png' %}" alt="" class="item-img">
+                <a href="/news/NX">
+                    <div class="item-mask"></div>
+                </a>
+                <div class="item-caption">
+                    <p class="caption-title">넥센 히어로즈</p>
+                    <div class="caption-divider"></div>
+                    <p class="caption-desc">전체기사보기</p>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_LG.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">엘지 트윈스</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_KIA.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">기아 타이거스</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_SK.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">에스케이 와이번스</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_HH.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">한화 이글스</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_LT.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">롯데 자이언츠</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_SS.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">삼성 라이온스</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-4 col-xs-6">-->
+            <!--<div class="team-item">-->
+                <!--<img src="{% static 'images/emblem_KT.png' %}" alt="" class="item-img">-->
+                <!--<div class="item-mask"></div>-->
+                <!--<div class="item-caption">-->
+                    <!--<p class="caption-title">케이티 위즈</p>-->
+                    <!--<div class="caption-divider"></div>-->
+                    <!--<p class="caption-desc">전체기사보기</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+
+
+
+</body>
+</html>
