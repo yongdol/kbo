@@ -11,10 +11,10 @@ class Team(models.Model):
 
 class Article(models.Model):
     team = models.ForeignKey(Team)
-
-    title = models.CharField(max_length=100, blank=True)
-    contents = models.CharField(max_length=500, blank=True)
-    link = models.URLField(blank=True)
+    date = models.IntegerField(blank=True)
+    title = models.CharField(max_length=100, blank=True, unique=True)
+    contents = models.CharField(max_length=500, blank=True, unique=True)
+    link = models.URLField(blank=True, unique=True)
 
     def __str__(self):
         return self.title
