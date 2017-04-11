@@ -9,4 +9,8 @@
 6. 날짜별 기사보기
 7. 날짜별 스코어보드
 8. 경기일정
-9. get_article.py -> view 에서 함수로 처리하기
+9. <del>crawling.py 함수화
+10. crawling.py -> view 에서 함수로 처리하기
+11. (9번이 수정되면)team_dict 를 DB에서 가져오는 걸로 바꾸기
+12. selenium 드라이버 사용시 브라우저 화면에 안보이게 하기.<del>가능한가...??
+13. nav-var 반응형으로만들기
