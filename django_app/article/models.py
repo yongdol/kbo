@@ -11,8 +11,9 @@ class Team(models.Model):
 
 class Article(models.Model):
     team = models.ForeignKey(Team)
-    title = models.CharField(max_length=100)
-    contents = models.CharField(max_length=500)
+
+    title = models.CharField(max_length=100, blank=True)
+    contents = models.CharField(max_length=500, blank=True)
     link = models.URLField(blank=True)
 
     def __str__(self):

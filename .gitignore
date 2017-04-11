@@ -1,7 +1,7 @@
 #project custom
 *.sqlite3
 .idea/
-django_app/templates/articls/
+django_app/templates/articles/
 
 #Config folders
 django_app/.conf/

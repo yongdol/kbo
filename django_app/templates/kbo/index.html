@@ -71,44 +71,45 @@
             <div class="col-md-1"></div>
         </div>
     </nav>
+    {% block content %}
     <div class="container team-list">
         <div class="col-sm-4 col-xs-6">
             <div class="team-item">
                 <img src="{% static 'images/emblem_OB.png' %}" alt="" class="item-img">
-                <a href="/news/OB">
+                <a href="/article/1">
                     <div class="item-mask"></div>
+                    <div class="item-caption">
+                        <p class="caption-title">두산 베어스</p>
+                        <div class="caption-divider"></div>
+                        <p class="caption-desc">전체기사보기</p>
+                    </div>
                 </a>
-                <div class="item-caption">
-                    <p class="caption-title">두산 베어스</p>
-                    <div class="caption-divider"></div>
-                    <p class="caption-desc">전체기사보기</p>
-                </div>
             </div>
         </div>
         <div class="col-sm-4 col-xs-6">
             <div class="team-item">
                 <img src="{% static 'images/emblem_NC.png' %}" alt="" class="item-img">
-                <a href="/news/NC">
+                <a href="/article/2">
                     <div class="item-mask"></div>
+                    <div class="item-caption">
+                        <p class="caption-title">엔씨 다이노스</p>
+                        <div class="caption-divider"></div>
+                        <p class="caption-desc">전체기사보기</p>
+                    </div>
                 </a>
-                <div class="item-caption">
-                    <p class="caption-title">엔씨 다이노스</p>
-                    <div class="caption-divider"></div>
-                    <p class="caption-desc">전체기사보기</p>
-                </div>
             </div>
         </div>
         <div class="col-sm-4 col-xs-6">
             <div class="team-item">
                 <img src="{% static 'images/emblem_NX.png' %}" alt="" class="item-img">
-                <a href="/news/NX">
+                <a href="/article/3">
                     <div class="item-mask"></div>
+                    <div class="item-caption">
+                        <p class="caption-title">넥센 히어로즈</p>
+                        <div class="caption-divider"></div>
+                        <p class="caption-desc">전체기사보기</p>
+                    </div>
                 </a>
-                <div class="item-caption">
-                    <p class="caption-title">넥센 히어로즈</p>
-                    <div class="caption-divider"></div>
-                    <p class="caption-desc">전체기사보기</p>
-                </div>
             </div>
         </div>
         <!--<div class="col-sm-4 col-xs-6">-->
@@ -169,12 +170,14 @@
         <!--<div class="col-sm-4 col-xs-6">-->
             <!--<div class="team-item">-->
                 <!--<img src="{% static 'images/emblem_SS.png' %}" alt="" class="item-img">-->
-                <!--<div class="item-mask"></div>-->
-                <!--<div class="item-caption">-->
-                    <!--<p class="caption-title">삼성 라이온스</p>-->
-                    <!--<div class="caption-divider"></div>-->
-                    <!--<p class="caption-desc">전체기사보기</p>-->
-                <!--</div>-->
+                <!--<a href="/article/9">-->
+                    <!--<div class="item-mask"></div>-->
+                    <!--<div class="item-caption">-->
+                        <!--<p class="caption-title">삼성 라이온스</p>-->
+                        <!--<div class="caption-divider"></div>-->
+                        <!--<p class="caption-desc">전체기사보기</p>-->
+                    <!--</div>-->
+                 <!--</a>-->
             <!--</div>-->
         <!--</div>-->
         <!--<div class="col-sm-4 col-xs-6">-->
@@ -189,6 +192,7 @@
             <!--</div>-->
         <!--</div>-->
     </div>
+    {% endblock %}
 
 
 
