@@ -5,23 +5,34 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 
-team_dict = {'OB': '1', 'NC': '2', 'WO': '3', 'LG': '4', 'HT': '5', 'SK': '6', 'HH': '7', 'LT': '8', 'SS': '9', 'KT': '10'}
+# team_dict = {
+#     'OB': '1',
+#     'NC': '2',
+#     'WO': '3',
+#     'LG': '4',
+#     'HT': '5',
+#     'SK': '6',
+#     'HH': '7',
+#     'LT': '8',
+#     'SS': '9',
+#     'KT': '10'
+# }
+team_dict = {'HH': '7'}
 # today = datetime.datetime.now().strftime("%Y%m%d")
 today = '20170410'
-
-# selenium
 
 
 # crawling article and make file
 def crawling_data_make_file():
-    driver = webdriver.Firefox()
+    # driver = webdriver.Firefox()
+    driver = webdriver.PhantomJS()
     for team, team_id in team_dict.items():
         template_dir = './django_app/templates/articles/' + team + '/'
         file_name = template_dir + today + '_' + team + ".txt"
         url = 'http://sports.news.naver.com/kbo/news/index.nhn?view=text&type=team&team=' + team + '&date=' + today
         driver.get(url)
         # driver.implicitly_wait(5)
-        sleep(5)
+        # sleep(5)
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         news_list_div = soup.select('div.news_list > ul > li > div.text')
@@ -62,7 +73,10 @@ def save_data():
             # print(title)
             # print(contents)
             # print(link)
-            cur.execute('INSERT OR IGNORE INTO article_article (team_id, title, contents, link, date) VALUES(?, ?, ?, ?, ?)', (team_id, title, contents, link, today))
+            lower_team = team.lower()
+            print(lower_team)
+            cur.execute("INSERT OR IGNORE INTO article_{team_table_name} (team_id, title, contents, link, date) \
+                    VALUES(?, ?, ?, ?, ?)".format(team_table_name=lower_team), (team_id, title, contents, link, today))
             con.commit()
         f.close()
     cur.close()

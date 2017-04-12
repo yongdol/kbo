@@ -2,6 +2,8 @@
 *.sqlite3
 .idea/
 django_app/templates/articles/
+*.log
+test.txt
 
 #Config folders
 django_app/.conf/
