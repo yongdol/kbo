@@ -14,6 +14,7 @@
 11. (9번이 수정되면)team_dict 를 DB에서 가져오는 걸로 바꾸기
 12. <del>selenium 드라이버 사용시 브라우저 화면에 안보이게 하기 => PhantomJS 이용
 13. nav-var 반응형으로만들기
+14. 팀별로 기사가져오기(view에서 팀별db의 object를 가져오기)
 
 
 -

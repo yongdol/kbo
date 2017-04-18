@@ -2,15 +2,16 @@ from django.shortcuts import render
 import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from article.models import Article, Team
+from article.models import Article, Team, OB
 
 
 def index(request):
     return render(request, 'kbo/index.html')
 
 
-def get_articles(request, team_id):
-    articles = Article.objects.filter(team_id=team_id)
+def get_articles(request, team):
+    print(team)
+    articles = Team.objects.all()
     context = {
         'articles': articles,
     }
