@@ -19,7 +19,7 @@ team_dict = {
 }
 # team_dict = {'HH': '7'}
 # today = datetime.datetime.now().strftime("%Y%m%d")
-today = '20170418'
+today = '20170410'
 
 
 # crawling article and make file
@@ -79,15 +79,16 @@ def save_data():
             for i in range(0, len(article_dict)):
                 title = article_dict[i]["title"]
                 contents = article_dict[i]["contents"]
+                # link = "www.sports.news.naver.com" + article_dict[i]["link"]
                 link = article_dict[i]["link"]
                 date = article_dict[i]["date"]
                 lower_team = team.lower()
-                cur.execute("INSERT OR IGNORE INTO article_{team_table_name} (team_id, title, contents, link, date) \
-                    VALUES(?, ?, ?, ?, ?)".format(team_table_name=lower_team), (team_id, title, contents, link, date))
+                cur.execute("INSERT OR IGNORE INTO article_article (team_id, title, contents, link, date) \
+                    VALUES(?, ?, ?, ?, ?)", (team_id, title, contents, link, date))
                 con.commit()
         f.close()
     cur.close()
 
 
-crawling_data_make_file()
+# crawling_data_make_file()
 save_data()
