@@ -15,6 +15,8 @@ class Article(models.Model):
     title = models.CharField(max_length=100, blank=True)
     contents = models.CharField(max_length=500, blank=True)
     link = models.URLField(blank=True, unique=True)
+    img = models.URLField(blank=True)
 
     def __str__(self):
         return self.title
+

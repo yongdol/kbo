@@ -17,7 +17,7 @@ team_dict = {
     'SS': '9',
     'KT': '10'
 }
-# team_dict = {'HH': '7'}
+# team_dict = {'KT': '10'}
 # today = datetime.datetime.now().strftime("%Y%m%d")
 today = '20170410'
 
@@ -39,23 +39,57 @@ def crawling_data_make_file():
         total_page = len(soup.select('div.paginate > a'))
 
         # save article all pages
+        # for page in range(1, total_page + 2):
+        #     target_url = base_url + '&page=' + str(page)
+        #     print(target_url)
+        #     driver.get(target_url)
+        #     html = driver.page_source
+        #     soup = BeautifulSoup(html, 'html.parser')
+        #     news_list_div = soup.select('div.news_list > ul > li > div.text')
+        #
+        #     for news_list in news_list_div:
+        #         a_tag = news_list.find('a')
+        #         news_link = "http://sports.news.naver.com" + a_tag.get('href')
+        #         news_title = str(a_tag.find('span')).replace('<span>', '').replace('</span>', '').strip()
+        #         news_contents = str(news_list.find('p')).replace('<p class="desc">', '').replace('</p>', '').strip()
+        #         article_data.append(
+        #             {"title": news_title,
+        #              "contents": news_contents,
+        #              "link": news_link,
+        #              "date": today,
+        #              }
+        #         )
+
         for page in range(1, total_page + 2):
             target_url = base_url + '&page=' + str(page)
             print(target_url)
             driver.get(target_url)
             html = driver.page_source
             soup = BeautifulSoup(html, 'html.parser')
-            news_list_div = soup.select('div.news_list > ul > li > div.text')
+            news_list_div = soup.select('div.news_list > ul > li')
             for news_list in news_list_div:
-                a_tag = news_list.find('a')
-                news_link = a_tag.get('href')
-                news_title = str(a_tag.find('span')).replace('<span>', '').replace('</span>', '').strip()
-                news_contents = str(news_list.find('p')).replace('<p class="desc">', '').replace('</p>', '').strip()
+                news_link = "http://sports.news.naver.com" + news_list.find('a').get('href')
+                news_title = news_list.find('div').text.split('\n')[1]
+                news_contents = news_list.find('div').text.split('\n')[2]
+                news_img = news_list.find('img')
+                if news_img is None:
+                    news_img = "None"
+                else:
+                    news_img = news_img.get('src')
+
+                # print(news_link)
+                # print(news_contents)
+                # print(news_img)
+                # print(news_title)
+                # print("----------------------------------------------------------")
+
+
                 article_data.append(
                     {"title": news_title,
                      "contents": news_contents,
                      "link": news_link,
                      "date": today,
+                     "img": news_img,
                      }
                 )
 
@@ -79,16 +113,15 @@ def save_data():
             for i in range(0, len(article_dict)):
                 title = article_dict[i]["title"]
                 contents = article_dict[i]["contents"]
-                # link = "www.sports.news.naver.com" + article_dict[i]["link"]
                 link = article_dict[i]["link"]
                 date = article_dict[i]["date"]
-                lower_team = team.lower()
-                cur.execute("INSERT OR IGNORE INTO article_article (team_id, title, contents, link, date) \
-                    VALUES(?, ?, ?, ?, ?)", (team_id, title, contents, link, date))
+                img = article_dict[i]["img"]
+                cur.execute("INSERT OR IGNORE INTO article_article (team_id, title, contents, link, date, img) \
+                    VALUES(?, ?, ?, ?, ?, ?)", (team_id, title, contents, link, date, img))
                 con.commit()
         f.close()
     cur.close()
 
 
-# crawling_data_make_file()
+crawling_data_make_file()
 save_data()

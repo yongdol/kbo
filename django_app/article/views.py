@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from article.models import Article
 
 # today = datetime.datetime.now().strftime("%Y%m%d")
@@ -13,3 +13,5 @@ class ArticleListView(ListView):
 
     def get_queryset(self):
         return Article.objects.filter(team_id=self.kwargs['team_id'], date=today).order_by('id')
+
+

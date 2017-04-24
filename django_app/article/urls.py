@@ -6,6 +6,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name="kbo/index.html")),
-    url(r'^article/(?P<team_id>\d+)/$', ArticleListView.as_view()),
+    # url(r'^$', TemplateView.as_view(template_name="kbo/index.html")),
+    url(r'^(?P<team_id>\d+)/$', ArticleListView.as_view()),
 ]
