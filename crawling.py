@@ -18,8 +18,8 @@ team_dict = {
     'KT': '10'
 }
 # team_dict = {'KT': '10'}
-# today = datetime.datetime.now().strftime("%Y%m%d")
-today = '20170410'
+today = datetime.datetime.now().strftime("%Y%m%d")
+# today = '20170425'
 
 
 # crawling article and make file
@@ -35,30 +35,8 @@ def crawling_data_make_file():
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
 
-        # total page
+        # total page check
         total_page = len(soup.select('div.paginate > a'))
-
-        # save article all pages
-        # for page in range(1, total_page + 2):
-        #     target_url = base_url + '&page=' + str(page)
-        #     print(target_url)
-        #     driver.get(target_url)
-        #     html = driver.page_source
-        #     soup = BeautifulSoup(html, 'html.parser')
-        #     news_list_div = soup.select('div.news_list > ul > li > div.text')
-        #
-        #     for news_list in news_list_div:
-        #         a_tag = news_list.find('a')
-        #         news_link = "http://sports.news.naver.com" + a_tag.get('href')
-        #         news_title = str(a_tag.find('span')).replace('<span>', '').replace('</span>', '').strip()
-        #         news_contents = str(news_list.find('p')).replace('<p class="desc">', '').replace('</p>', '').strip()
-        #         article_data.append(
-        #             {"title": news_title,
-        #              "contents": news_contents,
-        #              "link": news_link,
-        #              "date": today,
-        #              }
-        #         )
 
         for page in range(1, total_page + 2):
             target_url = base_url + '&page=' + str(page)
@@ -72,17 +50,12 @@ def crawling_data_make_file():
                 news_title = news_list.find('div').text.split('\n')[1]
                 news_contents = news_list.find('div').text.split('\n')[2]
                 news_img = news_list.find('img')
+
+                # img check
                 if news_img is None:
                     news_img = "None"
                 else:
                     news_img = news_img.get('src')
-
-                # print(news_link)
-                # print(news_contents)
-                # print(news_img)
-                # print(news_title)
-                # print("----------------------------------------------------------")
-
 
                 article_data.append(
                     {"title": news_title,

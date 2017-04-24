@@ -1,11 +1,9 @@
 from django.conf.urls import url
-from django.views.generic import TemplateView
 
-from article.views import ArticleListView
-from . import views
+from article import views
+# from article.views import ArticleListView
 
 
 urlpatterns = [
-    # url(r'^$', TemplateView.as_view(template_name="kbo/index.html")),
-    url(r'^(?P<team_id>\d+)/$', ArticleListView.as_view()),
+    url(r'^(?P<team_id>\d+)/(?P<date>\d+)/$', views.get_article_list, name="get_article_list"),
 ]
