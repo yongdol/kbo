@@ -1,0 +1,98 @@
+{% extends 'kbo/index.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-container">
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown">
+            <a href="{% url 'index' %}">
+                <button class="btn btn-primary" type="button">메인페이지</button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">구단별기사보기
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="/article/1/{{ today }}">두산</a></li>
+                <li><a href="/article/2/{{ today }}">NC</a></li>
+                <li><a href="/article/3/{{ today }}">넥센</a></li>
+                <li><a href="/article/4/{{ today }}">LG</a></li>
+                <li><a href="/article/5/{{ today }}">KIA</a></li>
+                <li><a href="/article/6/{{ today }}">SK</a></li>
+                <li><a href="/article/7/{{ today }}">한화</a></li>
+                <li><a href="/article/8/{{ today }}">롯데</a></li>
+                <li><a href="/article/9/{{ today }}">삼성</a></li>
+                <li><a href="/article/10/{{ today }}">KT</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">날짜별기사보기
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                {% for date in dates %}
+                    <li><a href="{% url 'get_article_list' team_id date %}" methods="post">{{ date }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6"></div>
+</div>
+
+{% if articles|length > 0 %}
+    <div class="container team-list">
+        {% for article in articles %}
+        <div class="col-sm-3 col-xs-6">
+            <div class="team-item">
+                {% if article.img == "None" %}
+                    {% with 'images/no_img_'|add:team_id|add:'.png' as image_static %}
+                    <img src="{% static image_static %}" alt="" class="item-img">
+                    {% endwith %}
+                {% else %}
+                    <img src="{{ article.img }}" alt="" class="item-img">
+                {% endif %}
+                <a href="{{ article.link }}" target="_blank">
+                    <div class="item-mask"></div>
+                    <div class="item-caption">
+                        <p class="caption-title">{{ article.title }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="text-center">
+        <li>기사가 아직 없습니다</li>
+    </div>
+{% endif %}
+<div class="col-sm-4 col-xs-6"></div>
+<div class="col-sm-4 col-xs-6">
+    {% if articles.has_other_pages %}
+    <ul class="pagination">
+        {% if articles.has_previous %}
+            <li><a href="?page={{ articles.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in articles.paginator.page_range %}
+            {% if articles.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if articles.has_next %}
+            <li><a href="?page={{ articles.next_page_number }}">&raquo;</a></li>
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+<div class="col-sm-4 col-xs-6"></div>
+
+
+{% endblock %}

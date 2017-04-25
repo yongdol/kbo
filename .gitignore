@@ -1,7 +1,6 @@
 #project custom
 *.sqlite3
 .idea/
-django_app/templates/articles/
 *.log
 test.txt
 
