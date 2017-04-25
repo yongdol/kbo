@@ -2,14 +2,7 @@ import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
 from article.models import Article
-
-
-def index(request):
-    today = datetime.datetime.now().strftime("%Y%m%d")
-    # today = 20170410
-    return render(request, 'kbo/index.html', {'today': today})
 
 
 def get_article_list(request, team_id, date):
