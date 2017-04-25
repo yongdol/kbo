@@ -18,8 +18,8 @@ team_dict = {
     'KT': '10'
 }
 # team_dict = {'KT': '10'}
-today = datetime.datetime.now().strftime("%Y%m%d")
-# today = '20170425'
+# today = datetime.datetime.now().strftime("%Y%m%d")
+today = '2017042'
 
 
 # crawling article and make file
@@ -96,5 +96,5 @@ def save_data():
     cur.close()
 
 
-crawling_data_make_file()
+# crawling_data_make_file()
 save_data()
