@@ -2,7 +2,8 @@ from django.db import models
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=10)
+    full_name = models.CharField(max_length=10)
+    short_name = models.CharField(max_length=5)
     nick_name = models.CharField(max_length=5)
 
     def __str__(self):

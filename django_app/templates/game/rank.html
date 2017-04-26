@@ -33,7 +33,7 @@
         <tbody>
             {% for data in rank_data %}
             <tr class="active">
-                <td>{{ data.rank }}</td>
+                <td>{{ data.rank }} | {{ data.teamrank.}}</td>
                 <td>
                     {% with data.team_id|stringformat:'s' as str_team_id %}
                         {% with 'images/no_img_'|add:str_team_id|add:'.png' as image_static %}
