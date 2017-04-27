@@ -3,11 +3,11 @@ from django.db import models
 
 class Team(models.Model):
     full_name = models.CharField(max_length=10)
-    short_name = models.CharField(max_length=5)
-    nick_name = models.CharField(max_length=5)
+    short_name = models.CharField(max_length=3)
+    nick_name = models.CharField(max_length=2)
 
     def __str__(self):
-        return self.name
+        return self.full_name
 
 
 class Article(models.Model):
