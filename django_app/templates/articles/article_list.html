@@ -2,14 +2,14 @@
 {% load staticfiles %}
 {% block content %}
 <div class="btn-container">
-    <div class="col-sm-3 col-xs-6">
+    <div class="col-sm-2 col-xs-6">
         <div class="dropdown">
             <a href="{% url 'index' %}">
                 <button class="btn btn-primary" type="button">메인페이지</button>
             </a>
         </div>
     </div>
-    <div class="col-sm-3 col-xs-6">
+    <div class="col-sm-2 col-xs-6">
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">구단별기사보기
                 <span class="caret"></span></button>
@@ -27,7 +27,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-sm-3 col-xs-6">
+    <div class="col-sm-2 col-xs-6">
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">날짜별기사보기
                 <span class="caret"></span></button>
@@ -38,38 +38,56 @@
             </ul>
         </div>
     </div>
-    <div class="col-sm-3 col-xs-6"></div>
-</div>
-
-{% if articles|length > 0 %}
-    <div class="container team-list">
-        {% for article in articles %}
-        <div class="col-sm-3 col-xs-6">
-            <div class="team-item">
-                {% if article.img == "None" %}
-                    {% with 'images/no_img_'|add:team_id|add:'.png' as image_static %}
-                    <img src="{% static image_static %}" alt="" class="item-img">
-                    {% endwith %}
-                {% else %}
-                    <img src="{{ article.img }}" alt="" class="item-img">
-                {% endif %}
-                <a href="{{ article.link }}" target="_blank">
-                    <div class="item-mask"></div>
-                    <div class="item-caption">
-                        <p class="caption-title">{{ article.title }}</p>
-                    </div>
-                </a>
-            </div>
+    <div class="col-sm-2 col-xs-6">
+        <div class="dropdown">
+            <a href="{% url 'get_team_rank' %}">
+                <button class="btn btn-primary" type="button">구단순위보기</button>
+            </a>
         </div>
-        {% endfor %}
     </div>
+    <div class="col-sm-2 col-xs-6">
+        <div class="dropdown">
+            <a href="{% url 'get_hitter_rank' %}">
+                <button class="btn btn-primary" type="button">타자순위보기</button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-2 col-xs-6">
+        <div class="dropdown">
+            <a href="#">
+                <button class="btn btn-primary" type="button">투수순위보기</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% if articles|length > 0 %}
+<div class="container team-list">
+    {% for article in articles %}
+    <div class="col-sm-3 col-xs-6">
+        <div class="team-item">
+            {% if article.img == "None" %}
+            {% with 'images/no_img_'|add:team_id|add:'.png' as image_static %}
+                <img src="{% static image_static %}" alt="" class="item-img">
+            {% endwith %}
+            {% else %}
+                <img src="{{ article.img }}" alt="" class="item-img">
+            {% endif %}
+            <a href="{{ article.link }}" target="_blank">
+                <div class="item-mask"></div>
+                <div class="item-caption">
+                    <p class="caption-title">{{ article.title }}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% else %}
-    <div class="text-center">
-        <li>기사가 아직 없습니다</li>
-    </div>
+<div class="text-center">
+    <li>{{ today }} 의 기사가 아직 없습니다</li>
+</div>
 {% endif %}
-<div class="col-sm-4 col-xs-6"></div>
-<div class="col-sm-4 col-xs-6">
+<div class="pagination-container">
     {% if articles.has_other_pages %}
     <ul class="pagination">
         {% if articles.has_previous %}
@@ -92,7 +110,6 @@
     </ul>
     {% endif %}
 </div>
-<div class="col-sm-4 col-xs-6"></div>
-
 
 {% endblock %}
+

@@ -4,30 +4,42 @@ import sqlite3
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
+team_list = [
+            {'full_name': '두산베어스', 'short_name': '두산', 'nick_name': 'OB', 'id': '1'},
+            {'full_name': '엔씨다이노스', 'short_name': 'NC', 'nick_name': 'NC', 'id': '2'},
+            {'full_name': '넥센히어로즈', 'short_name': '넥센', 'nick_name': 'WO', 'id': '3'},
+            {'full_name': '엘지트윈스', 'short_name': 'LG', 'nick_name': 'LG', 'id': '4'},
+            {'full_name': '기아타이거스', 'short_name': 'KIA', 'nick_name': 'HT', 'id': '5'},
+            {'full_name': '에스케이와이번스', 'short_name': 'SK', 'nick_name': 'SK', 'id': '6'},
+            {'full_name': '한화이글스', 'short_name': '한화', 'nick_name': 'HH', 'id': '7'},
+            {'full_name': '롯데자이언츠', 'short_name': '롯데', 'nick_name': 'LT', 'id': '8'},
+            {'full_name': '삼성라이온즈', 'short_name': '삼성', 'nick_name': 'SS', 'id': '9'},
+            {'full_name': '케이티위즈', 'short_name': 'KT', 'nick_name': 'KT', 'id': '10'}
+]
 
-team_dict = {
-    'OB': '1',
-    'NC': '2',
-    'WO': '3',
-    'LG': '4',
-    'HT': '5',
-    'SK': '6',
-    'HH': '7',
-    'LT': '8',
-    'SS': '9',
-    'KT': '10'
-}
-# team_dict = {'KT': '10'}
-# today = datetime.datetime.now().strftime("%Y%m%d")
-today = '20170425'
+today = datetime.datetime.now().strftime("%Y%m%d")
+# today = '20170423'
+
+
+def save_team():
+    con = sqlite3.connect("./django_app/db.sqlite3")
+    cur = con.cursor()
+    for i in range(0, len(team_list)):
+        full_name = team_list[i]['full_name']
+        short_name = team_list[i]['short_name']
+        nick_name = team_list[i]['nick_name']
+        cur.execute("INSERT INTO article_team (full_name, short_name, nick_name) VALUES(?, ?, ?)", (full_name, short_name, nick_name))
+        con.commit()
+    cur.close()
 
 
 # crawling article and make file
 def crawling_data_make_file():
     # driver = webdriver.PhantomJS()
     driver = webdriver.Firefox()
-    for team, team_id in team_dict.items():
+    for i in range(0, len(team_list)):
         article_data = []
+        team = team_list[i]['nick_name']
         template_dir = './django_app/templates/articles/' + team + '/'
         file_name = template_dir + today + '_' + team + ".txt"
         base_url = 'http://sports.news.naver.com/kbo/news/index.nhn?view=text&type=team&team=' + team + '&date=' + today
@@ -76,7 +88,10 @@ def save_data():
     # sqlite3 connect
     con = sqlite3.connect("./django_app/db.sqlite3")
     cur = con.cursor()
-    for team, team_id in team_dict.items():
+    for i in range(0, len(team_list)):
+        team = team_list[i]['nick_name']
+        team_id = i + 1
+        # team_id = 10
         template_dir = './django_app/templates/articles/' + team + '/'
         file_name = template_dir + today + '_' + team + ".txt"
         f = open(file_name, 'r')
@@ -96,5 +111,6 @@ def save_data():
     cur.close()
 
 
+# save_team()
 crawling_data_make_file()
 save_data()

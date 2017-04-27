@@ -1,0 +1,107 @@
+{% extends 'kbo/index.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-container">
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <a href="{% url 'index' %}">
+                <button class="btn btn-primary" type="button">메인페이지</button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">구단별기사보기
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu rank-to-article-drop">
+                <li><a href="/article/1/{{ today }}">두산</a></li>
+                <li><a href="/article/2/{{ today }}">NC</a></li>
+                <li><a href="/article/3/{{ today }}">넥센</a></li>
+                <li><a href="/article/4/{{ today }}">LG</a></li>
+                <li><a href="/article/5/{{ today }}">KIA</a></li>
+                <li><a href="/article/6/{{ today }}">SK</a></li>
+                <li><a href="/article/7/{{ today }}">한화</a></li>
+                <li><a href="/article/8/{{ today }}">롯데</a></li>
+                <li><a href="/article/9/{{ today }}">삼성</a></li>
+                <li><a href="/article/10/{{ today }}">KT</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <a href="{% url 'get_team_rank' %}">
+                <button class="btn btn-primary" type="button">구단순위보기</button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <a href="#">
+                <button class="btn btn-primary" type="button">투수순위보기</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="rank-container">
+    타율 TOP 10
+    <table class="table">
+        <thead>
+            <tr class="active">
+                <th>순위</th>
+                <th>선수명</th>
+                <th>팀명</th>
+                <th>타율</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in hitter_rank_data|slice:"10" %}
+            <tr class="active">
+                <td>{{ data.id }}</td>
+                <td>{{ data.player }}</td>
+                <td>
+                    {% for team in team_data %}
+                        {% if team.id == data.team_id %}
+                            {{ team.short_name }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ data.avg }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+<!--<div class="rank-container">-->
+    <!--<table class="table">-->
+        <!--<thead>-->
+            <!--<tr class="active">-->
+                <!--<th>순위</th>-->
+                <!--<th>선수명</th>-->
+                <!--<th>팀명</th>-->
+                <!--<th>홈런</th>-->
+            <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+            <!--{% for data in homerun_rank_data|slice:"10" %}-->
+            <!--<tr class="active">-->
+                <!--<td>{{ data.rank }}</td>-->
+                <!--<td>{{ data.player }}</td>-->
+                <!--<td>-->
+                    <!--{% for team in team_data %}-->
+                        <!--{% if team.id == data.team_id %}-->
+                            <!--{{ team.short_name }}-->
+                        <!--{% endif %}-->
+                    <!--{% endfor %}-->
+                <!--</td>-->
+                <!--<td>{{ data.h }}</td>-->
+            <!--</tr>-->
+            <!--{% endfor %}-->
+        <!--</tbody>-->
+
+    <!--</table>-->
+<!--</div>-->
+
+{% endblock %}

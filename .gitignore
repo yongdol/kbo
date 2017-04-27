@@ -3,6 +3,16 @@
 .idea/
 *.log
 test.txt
+django_app/templates/article/HH/*.txt
+django_app/templates/article/HT/*.txt
+django_app/templates/article/LG/*.txt
+django_app/templates/article/LT/*.txt
+django_app/templates/article/NC/*.txt
+django_app/templates/article/OB/*.txt
+django_app/templates/article/SK/*.txt
+django_app/templates/article/SS/*.txt
+django_app/templates/article/WO/*.txt
+django_app/templates/article/KT/*.txt
 
 #Config folders
 django_app/.conf/

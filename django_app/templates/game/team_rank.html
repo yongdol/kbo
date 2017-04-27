@@ -1,0 +1,143 @@
+{% extends 'kbo/index.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="btn-container">
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <a href="{% url 'index' %}">
+                <button class="btn btn-primary" type="button">메인페이지</button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">구단별기사보기
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu rank-to-article-drop">
+                <li><a href="/article/1/{{ today }}">두산</a></li>
+                <li><a href="/article/2/{{ today }}">NC</a></li>
+                <li><a href="/article/3/{{ today }}">넥센</a></li>
+                <li><a href="/article/4/{{ today }}">LG</a></li>
+                <li><a href="/article/5/{{ today }}">KIA</a></li>
+                <li><a href="/article/6/{{ today }}">SK</a></li>
+                <li><a href="/article/7/{{ today }}">한화</a></li>
+                <li><a href="/article/8/{{ today }}">롯데</a></li>
+                <li><a href="/article/9/{{ today }}">삼성</a></li>
+                <li><a href="/article/10/{{ today }}">KT</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <a href="{% url 'get_hitter_rank' %}">
+                <button class="btn btn-primary" type="button">타자순위보기</button>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+        <div class="dropdown" style="text-align: center;">
+            <a href="{% url 'get_hitter_rank' %}">
+                <button class="btn btn-primary" type="button">투수순위보기</button>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="rank-container">
+    <table class="table">
+        <colgroup>
+            <col width="76">
+            <col width="100">
+            <col width="40">
+            <col width="40">
+            <col width="40">
+            <col width="60">
+            <col width="60">
+            <col width="100">
+            <col width="50">
+            <col width="60">
+            <col width="60">
+        </colgroup>
+        <thead>
+            <tr class="active">
+                <th>순위</th>
+                <th>팀</th>
+                <th>승</th>
+                <th>패</th>
+                <th>무</th>
+                <th>승률</th>
+                <th>게임차</th>
+                <th>최근10경기</th>
+                <th>연속</th>
+                <th>홈</th>
+                <th>어웨이</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in rank_data %}
+            <tr class="active">
+                <td>{{ data.rank }}</td>
+                <td>
+                    {% for team in team_data %}
+                        {% if team.id == data.team_id %}
+                            {{ team.short_name }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ data.win }}</td>
+                <td>{{ data.lose }}</td>
+                <td>{{ data.draw }}</td>
+                <td>{{ data.win_rate }}</td>
+                <td>{{ data.game_gap }}</td>
+                <td>{{ data.recent_10_game }}</td>
+                <td>{{ data.continuous }}</td>
+                <td>{{ data.home_score }}</td>
+                <td>{{ data.away_score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ rank_data.0.standard_date }} 기준
+</div>
+<script type="text/javascript">
+        google.charts.load('current', {'packages':['line']});
+        google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', '날짜');
+        {% for data in team_data %}
+            data.addColumn('number', '{{ data.short_name }}');
+        {% endfor %}
+
+        data.addRows([
+
+            ['20170423',7,2,9,3,1,3,8,6,10,3],
+            ['20170424',7,2,8,3,1,3,8,6,10,3],
+            ['20170425',7,2,8,4,1,3,8,4,10,4],
+            ['20170426',7,2,8,3,1,3,8,3,10,6],
+            ['20170427',7,2,8,3,1,4,8,4,10,6]
+        ]);
+
+        var options = {
+            chart: {
+                title: '팀별 순위 변동 그래프',
+                subtitle: '{{ today }} 기준'
+            },
+            width: 900,
+            height: 500,
+            vAxis: {
+                direction: -1
+            }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+</script>
+
+<div class="rank-container">
+    <div id="linechart_material"></div>
+</div>
+
+
+{% endblock %}
